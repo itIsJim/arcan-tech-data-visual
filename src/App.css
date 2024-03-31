@@ -1,0 +1,27 @@
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.App {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Adjust based on your design needs */
+  align-items: center; /* Center children horizontally */
+  text-align: center;
+}
+
+/* Optional: If you want the h1 to not push down your app */
+h1 {
+  margin: 0;
+  text-align: center;
+  color: #eb4897;
+}
+
+#root > div > div > div > div.__________cytoscape_container > div {
+  display: flex;
+}

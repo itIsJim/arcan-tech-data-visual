@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html class="no-touch" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.arcan.tech/xmlrpc.php">
+<title>Arcan &#8211; The tool for technical debt detection</title>
+<meta name='robots' content='max-image-preview:large' />
+<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/1fa7f26dfe20d42e1dc13102/script.js"></script><link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel="alternate" type="application/rss+xml" title="Arcan &raquo; Feed" href="https://www.arcan.tech/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Arcan &raquo; Comments Feed" href="https://www.arcan.tech/comments/feed/" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.arcan.tech\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.1.5"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode,e=(p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0),i.toDataURL());return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='layerslider-css' href='https://www.arcan.tech/wp-content/plugins/LayerSlider/assets/static/layerslider/css/layerslider.css?ver=7.1.3' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.arcan.tech/wp-includes/css/dist/block-library/style.min.css?ver=6.1.5' type='text/css' media='all' />
+<link rel='stylesheet' id='swiper-css-css' href='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/styles/library/swiper.css?ver=7.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://www.arcan.tech/wp-includes/css/dashicons.min.css?ver=6.1.5' type='text/css' media='all' />
+<link rel='stylesheet' id='magnific-popup-css' href='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/styles/library/magnific-popup.css?ver=2.1.13' type='text/css' media='all' />
+<link rel='stylesheet' id='wpz-insta_block-frontend-style-css' href='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/styles/frontend/index.css?ver=221273692e37d5beb9805189a75a44f0' type='text/css' media='all' />
+<link rel='stylesheet' id='classic-theme-styles-css' href='https://www.arcan.tech/wp-includes/css/classic-themes.min.css?ver=1' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='cpsh-shortcodes-css' href='https://www.arcan.tech/wp-content/plugins/column-shortcodes/assets/css/shortcodes.css?ver=1.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css' href='https://www.arcan.tech/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=5.7.7' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-official-css' href='https://use.fontawesome.com/releases/v6.2.1/css/all.css' type='text/css' media='all' integrity="sha384-twcuYPV86B3vvpwNhWJuaLdUSLF9+ttgM2A6M870UYXrOsxKfER2MKox5cirApyA" crossorigin="anonymous" />
+<link rel='stylesheet' id='uncode-style-css' href='https://www.arcan.tech/wp-content/themes/uncode/library/css/style.css?ver=371788608' type='text/css' media='all' />
+<style id='uncode-style-inline-css' type='text/css'>
+
+@media (min-width: 960px) { .limit-width { max-width: 1200px; margin: auto;}}
+</style>
+<link rel='stylesheet' id='uncode-icons-css' href='https://www.arcan.tech/wp-content/themes/uncode/library/css/uncode-icons.css?ver=371788608' type='text/css' media='all' />
+<link rel='stylesheet' id='uncode-custom-style-css' href='https://www.arcan.tech/wp-content/themes/uncode/library/css/style-custom.css?ver=371788608' type='text/css' media='all' />
+<link rel='stylesheet' id='__EPYT__style-css' href='https://www.arcan.tech/wp-content/plugins/youtube-embed-plus/styles/ytprefs.min.css?ver=14.2.1' type='text/css' media='all' />
+<style id='__EPYT__style-inline-css' type='text/css'>
+
+                .epyt-gallery-thumb {
+                        width: 33.333%;
+                }
+                
+</style>
+<link rel='stylesheet' id='child-style-css' href='https://www.arcan.tech/wp-content/themes/uncode-child/style.css?ver=1383900278' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-official-v4shim-css' href='https://use.fontawesome.com/releases/v6.2.1/css/v4-shims.css' type='text/css' media='all' integrity="sha384-RreHPODFsMyzCpG+dKnwxOSjmjkuPWWdYP8sLpBRoSd8qPNJwaxKGUdxhQOKwUc7" crossorigin="anonymous" />
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/jquery/jquery.min.js?ver=3.6.1' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='layerslider-utils-js-extra'>
+/* <![CDATA[ */
+var LS_Meta = {"v":"7.1.3","fixGSAP":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.utils.js?ver=7.1.3' id='layerslider-utils-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.kreaturamedia.jquery.js?ver=7.1.3' id='layerslider-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/LayerSlider/assets/static/layerslider/js/layerslider.transitions.js?ver=7.1.3' id='layerslider-transitions-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/underscore.min.js?ver=1.13.4' id='underscore-js'></script>
+<script type='text/javascript' id='wp-util-js-extra'>
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/wp-util.min.js?ver=6.1.5' id='wp-util-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/scripts/library/magnific-popup.js?ver=1707865302' id='magnific-popup-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/scripts/library/swiper.js?ver=7.4.1' id='swiper-js-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/scripts/frontend/block.js?ver=bbee4d67b2da18bd1bf250c180e626bb' id='wpz-insta_block-frontend-script-js'></script>
+<script type='text/javascript' src='/wp-content/themes/uncode/library/js/ai-uncode.js' id='uncodeAI' data-home='/' data-path='/' data-breakpoints-images='258,516,720,1032,1440,2064,2880' id='ai-uncode-js'></script>
+<script type='text/javascript' id='uncode-init-js-extra'>
+/* <![CDATA[ */
+var SiteParameters = {"days":"days","hours":"hours","minutes":"minutes","seconds":"seconds","constant_scroll":"on","scroll_speed":"2","parallax_factor":"0.25","loading":"Loading\u2026","slide_name":"slide","slide_footer":"footer","ajax_url":"https:\/\/www.arcan.tech\/wp-admin\/admin-ajax.php","nonce_adaptive_images":"436aad6fd3","enable_debug":"","block_mobile_videos":"","is_frontend_editor":"","mobile_parallax_allowed":"","wireframes_plugin_active":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/themes/uncode/library/js/init.js?ver=371788608' id='uncode-init-js'></script>
+
+<!-- Google Analytics snippet added by Site Kit -->
+<script type='text/javascript' src='https://www.googletagmanager.com/gtag/js?id=G-TM3JX8VD3M' id='google_gtagjs-js' async></script>
+<script type='text/javascript' id='google_gtagjs-js-after'>
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["www.arcan.tech"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "G-TM3JX8VD3M");
+</script>
+
+<!-- End Google Analytics snippet added by Site Kit -->
+<script type='text/javascript' id='__ytprefs__-js-extra'>
+/* <![CDATA[ */
+var _EPYT_ = {"ajaxurl":"https:\/\/www.arcan.tech\/wp-admin\/admin-ajax.php","security":"3f2e808a47","gallery_scrolloffset":"20","eppathtoscripts":"https:\/\/www.arcan.tech\/wp-content\/plugins\/youtube-embed-plus\/scripts\/","eppath":"https:\/\/www.arcan.tech\/wp-content\/plugins\/youtube-embed-plus\/","epresponsiveselector":"[\"iframe.__youtube_prefs__\"]","epdovol":"1","version":"14.2.1","evselector":"iframe.__youtube_prefs__[src], iframe[src*=\"youtube.com\/embed\/\"], iframe[src*=\"youtube-nocookie.com\/embed\/\"]","ajax_compat":"","maxres_facade":"eager","ytapi_load":"light","pause_others":"","stopMobileBuffer":"1","facade_mode":"","not_live_on_channel":"","vi_active":"","vi_js_posttypes":[]};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/youtube-embed-plus/scripts/ytprefs.min.js?ver=14.2.1' id='__ytprefs__-js'></script>
+<meta name="generator" content="Powered by LayerSlider 7.1.3 - Multi-Purpose, Responsive, Parallax, Mobile-Friendly Slider Plugin for WordPress." />
+<!-- LayerSlider updates and docs at: https://layerslider.com -->
+<link rel="https://api.w.org/" href="https://www.arcan.tech/wp-json/" /><link rel="alternate" type="application/json" href="https://www.arcan.tech/wp-json/wp/v2/pages/82602" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.arcan.tech/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.arcan.tech/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 6.1.5" />
+<link rel="canonical" href="https://www.arcan.tech/" />
+<link rel='shortlink' href='https://www.arcan.tech/' />
+<link rel="alternate" type="application/json+oembed" href="https://www.arcan.tech/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.arcan.tech%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.arcan.tech/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.arcan.tech%2F&#038;format=xml" />
+<meta name="generator" content="Site Kit by Google 1.123.1" /><meta name="generator" content="Powered by Slider Revolution 6.6.14 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="https://www.arcan.tech/wp-content/uploads/2020/09/cropped-Logo_spesso-2-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://www.arcan.tech/wp-content/uploads/2020/09/cropped-Logo_spesso-2-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://www.arcan.tech/wp-content/uploads/2020/09/cropped-Logo_spesso-2-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.arcan.tech/wp-content/uploads/2020/09/cropped-Logo_spesso-2-1-270x270.png" />
+<script>function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+		<style type="text/css" id="wp-custom-css">
+			.grecaptcha-badge { visibility: hidden; }
+
+.content-column.one_half{
+	padding-right: 10px;
+}
+
+.m0{margin-top:0; margin-bottom:0}		</style>
+		<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>
+<body class="home page-template-default page page-id-82602  style-color-lxmt-bg hormenu-position-left hmenu hmenu-position-right header-full-width main-center-align textual-accent-color menu-has-cta mobile-parallax-not-allowed ilb-no-bounce unreg wpb-js-composer js-comp-ver-6.13.0 vc_responsive" data-border="0">
+		<div class="body-borders" data-border="0"><div class="top-border body-border-shadow"></div><div class="right-border body-border-shadow"></div><div class="bottom-border body-border-shadow"></div><div class="left-border body-border-shadow"></div><div class="top-border style-light-bg"></div><div class="right-border style-light-bg"></div><div class="bottom-border style-light-bg"></div><div class="left-border style-light-bg"></div></div>	<div class="box-wrapper">
+		<div class="box-container">
+		<script type="text/javascript">UNCODE.initBox();</script>
+		<div class="menu-wrapper menu-sticky">
+													
+													<header id="masthead" class="navbar menu-primary menu-dark submenu-dark style-dark-original menu-with-logo">
+														<div class="menu-container style-color-111635-bg menu-no-borders">
+															<div class="row-menu limit-width">
+																<div class="row-menu-inner">
+																	<div id="logo-container-mobile" class="col-lg-0 logo-container middle">
+																		<div id="main-logo" class="navbar-header style-dark">
+																			<a href="https://www.arcan.tech/" class="navbar-brand" data-minheight="20"><div class="logo-image main-logo  logo-light" data-maxheight="20" style="height: 20px;display:none;"><img decoding="async" src="https://www.arcan.tech/wp-content/uploads/2020/09/Scritta-Blu-01-uai-2064x270.png" alt="logo" width="2064" height="270" class="img-responsive" /></div><div class="logo-image main-logo  logo-dark" data-maxheight="20" style="height: 20px;"><img decoding="async" src="https://www.arcan.tech/wp-content/uploads/2020/09/Scritta-Bianca-01-uai-2064x270.png" alt="logo" width="2064" height="270" class="img-responsive" /></div></a>
+																		</div>
+																		<div class="mmb-container"><div class="mobile-menu-button 1 mobile-menu-button-dark lines-button x2"><span class="lines"></span></div></div>
+																	</div>
+																	<div class="col-lg-12 main-menu-container middle">
+																		<div class="menu-horizontal menu-dd-shadow-darker-std">
+																			<div class="menu-horizontal-inner">
+																				<div class="nav navbar-nav navbar-cta"><ul id="menu-main-menu" class="menu-cta-inner menu-smart sm"><li id="menu-item-83319" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83319 menu-item-link"><a title="Product" href="https://www.arcan.tech/product_overview/">Product<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-83431" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83431 menu-item-link"><a title="Solutions" href="https://www.arcan.tech/one-time-quality-assessment/">Solutions<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-82906" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82906 menu-item-link"><a title="Use cases" href="https://www.arcan.tech/by-use-case/">Use cases<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-82965" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82965 menu-item-link"><a title="Blog" href="https://www.arcan.tech/blog/">Blog<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-83243" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-83243 menu-item-link"><a title="Documentation" href="https://docs.arcan.tech/">Documentation<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-82744" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82744 menu-item-link"><a title="About" href="https://www.arcan.tech/about/">About<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+<li id="menu-item-82626" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-82626 dropdown menu-item-link"><a title="Contact" href="https://www.arcan.tech/contact/" data-toggle="dropdown" class="dropdown-toggle" data-type="title">Contact<i class="fa fa-angle-down fa-dropdown"></i></a>
+<ul role="menu" class="drop-menu">
+	<li id="menu-item-82966" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82966"><a title="Contact us" href="https://www.arcan.tech/contact/">Contact us<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+	<li id="menu-item-82837" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82837"><a title="Work with us" href="https://www.arcan.tech/work-with-us/">Work with us<i class="fa fa-angle-right fa-dropdown"></i></a></li>
+</ul>
+</li>
+<li id="menu-item-83173" class="menu-item-button"><a title="Get started" href="https://www.arcan.tech/get-started/"><div class="menu-btn-table"><div class="menu-btn-cell"><div class="btn-accent btn-round menu-item menu-item-type-post_type menu-item-object-page menu-item-83173 menu-btn-container btn"><span>Get started</span></div></div></div></a></li>
+</ul></div><div class="nav navbar-nav navbar-nav-last"><ul class="menu-smart sm menu-icons"><li class="menu-item-link search-icon style-dark dropdown"><a href="#" class="trigger-overlay search-icon" data-area="search" data-container="box-container">
+													<i class="fa fa-search3"></i><span class="desktop-hidden"><span>Search</span></span><i class="fa fa-angle-down fa-dropdown desktop-hidden"></i>
+													</a>
+													<ul role="menu" class="drop-menu desktop-hidden">
+														<li>
+															<form class="search" method="get" action="https://www.arcan.tech/">
+																<input type="search" class="search-field no-livesearch" placeholder="Search…" value="" name="s" title="Search for:" />
+															</form>
+														</li>
+													</ul></li></ul></div><div class="desktop-hidden">
+														 							</div></div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</header>
+												</div>			<script type="text/javascript">UNCODE.fixMenuHeight();</script>
+			<div class="main-wrapper">
+				<div class="main-container">
+					<div class="page-wrapper">
+						<div class="sections-container">
+<div id="page-header"><div class="header-wrapper header-uncode-block">
+									<div data-parent="true" class="vc_row style-color-111635-bg row-container boomapps_vcrow"><div class="row col-double-gutter exa-top-padding exa-bottom-padding single-h-padding limit-width row-parent row-header"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_left column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark animate_when_almost_visible zoom-in"  data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_row inverted-device-order row-internal row-container boomapps_vcrow"><div class="row col-double-gutter row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_left align_center_mobile column_child col-lg-6 boomapps_vccolumn col-md-50 half-internal-gutter"><div class="uncol style-dark" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h6 font-weight-500 text-uppercase" ><span>IMPROVE YOUR SOFTWARE DEVELOPMENT WITH AI</span></h3></div><div class="clear"></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h1 class="font-weight-500" ><span>Quantify your Technical Debt</span></h1></div><div class="clear"></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h3 font-weight-300" ><span><span style="font-weight: 400;">Arcan is the AI that helps you decide when and how much to invest in software quality.</span></span></h2></div><div class="clear"></div></div><div class="empty-space empty-single" ><span class="empty-space-inner"></span></div>
+<span class="btn-container" ><a href="https://www.arcan.tech/get-started/" class="custom-link btn btn-lg border-width-0 btn-accent btn-round btn-outline btn-icon-left" title="Contact" target="_blank">Try now!</a></span><div class="empty-space empty-single" ><span class="empty-space-inner"></span></div>
+<div class="uncode_text_column" ><p><em>Accelerated by Leonardo</em></p>
+</div><div class="uncode-single-media  text-left"><div class="single-wrapper" style="max-width: 50%;"><div class="tmb tmb-light  tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper">
+									<img decoding="async" class="wp-image-83026" src="https://www.arcan.tech/wp-content/uploads/2022/07/LOGO-LEONARDO_full-red_50_percent.png" width="561" height="99" alt="" srcset="https://www.arcan.tech/wp-content/uploads/2022/07/LOGO-LEONARDO_full-red_50_percent.png 561w, https://www.arcan.tech/wp-content/uploads/2022/07/LOGO-LEONARDO_full-red_50_percent-300x53.png 300w" sizes="(max-width: 561px) 100vw, 561px" /></div>
+				</div>
+			</div></div>
+					</div></div></div></div></div></div></div></div><div class="wpb_column pos-middle pos-center align_left column_child col-lg-6 boomapps_vccolumn col-md-50 single-internal-gutter"><div class="uncol style-dark" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-center animate_when_almost_visible zoom-in" data-delay="400"><div class="single-wrapper" style="max-width: 600px;"><div class="tmb tmb-light  tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper">
+									<img decoding="async" class="wp-image-82978" src="https://www.arcan.tech/wp-content/uploads/2022/07/illustrazione.png" width="1000" height="880" alt="" srcset="https://www.arcan.tech/wp-content/uploads/2022/07/illustrazione.png 1000w, https://www.arcan.tech/wp-content/uploads/2022/07/illustrazione-300x264.png 300w, https://www.arcan.tech/wp-content/uploads/2022/07/illustrazione-768x676.png 768w" sizes="(max-width: 1000px) 100vw, 1000px" /></div>
+				</div>
+			</div></div>
+					</div></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><script id="script-957021" data-row="script-957021" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-957021"));</script></div></div></div></div></div><script type="text/javascript">UNCODE.initHeader();</script><article id="post-82602" class="page-body style-light-bg post-82602 page type-page status-publish hentry">
+						<div class="post-wrapper">
+							<div class="post-body"><div class="post-content un-no-sidebar-layout"><div data-parent="true" class="vc_row style-color-lxmt-bg row-container boomapps_vcrow"><div class="row single-top-padding single-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn double-block-padding style-color-xsdn-bg"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h2" ><span>What it is</span></h2></div><div class="clear"></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_child col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h3 text-color-874661-color" ><span>Automatic tool for financial software quality assessment</span></h3><div><p>Arcan is a tool for software developers and tech product managers that automatically estimates the cost of keeping and solving Technical Debt (code inefficiencies). With both metrics, you can decide if and when to invest in improving your system's quality.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div></div></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_child col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><span class="btn-container" ><a href="https://demo.arcan.tech/" class="custom-link btn border-width-0 btn-color-874661 btn-round btn-icon-left" target="_blank">Live demo</a></span></div></div></div></div></div></div></div></div></div></div></div></div></div><script id="script-205512" data-row="script-205512" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-205512"));</script></div></div></div><div data-parent="true" class="vc_row style-color-xsdn-bg row-container boomapps_vcrow"><div class="row one-top-padding one-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn double-block-padding style-color-xsdn-bg"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h2" ><span>How it works</span></h2></div><div class="clear"></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h3 text-color-874661-color" ><span><span style="font-weight: 400;">Step 1: input</span><span></span></span></h3><div><p>Arcan automatically scans the source code of your project from your local folder or from your online repository.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div><div class="wpb_column pos-middle pos-center align_center column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h3 text-color-874661-color" ><span><span style="font-weight: 400;">Step 2: analysis</span><span></span></span></h3><div><p>Arcan reverse engineers your code and runs a set of automatic analysis for quality assessment and architectural anomalies detection.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div><div class="wpb_column pos-middle pos-center align_center column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h3 text-color-874661-color" ><span><span style="font-weight: 400;">Step 3: knowledge</span><span></span></span></h3><div><p>The Arcan analysis outputs the architectural map of your project and the results of the quality assessment.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><script id="script-121385" data-row="script-121385" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-121385"));</script></div></div></div><div data-parent="true" class="vc_row style-color-lxmt-bg row-container boomapps_vcrow"><div class="row double-top-padding double-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_left column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><span class="copycode"><div class="epyt-video-wrapper"><iframe  style="display: block; margin: 0px auto;"  id="_ytid_69720"  width="840" height="472"  data-origwidth="840" data-origheight="472" src="https://www.youtube.com/embed/mN4-oYTG42U?enablejsapi=1&autoplay=0&cc_load_policy=0&cc_lang_pref=&iv_load_policy=1&loop=0&modestbranding=0&rel=0&fs=1&playsinline=0&autohide=2&theme=dark&color=red&controls=1&" class="__youtube_prefs__  no-lazyload" title="Arcan - showcase (ENG)"  allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen data-no-lazy="1" data-skipgform_ajax_framebjll=""></iframe></div></span></div></div></div></div></div><script id="script-168951" data-row="script-168951" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-168951"));</script></div></div></div><div data-parent="true" class="vc_row row-container boomapps_vcrow"><div class="row one-top-padding no-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn single-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h2" ><span>Plans</span></h2></div><div class="clear"></div></div></div></div></div></div></div><script id="script-176419" data-row="script-176419" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-176419"));</script></div></div></div><div data-parent="true" class="vc_row row-container boomapps_vcrow"><div class="row unequal col-no-gutter no-top-padding no-bottom-padding single-h-padding limit-width row-parent" data-height-ratio="10"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_parent col-lg-6 boomapps_vccolumn col-md-33 half-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn single-block-padding"><div class="uncont"><div class="icon-box icon-box-top" ><div class="icon-box-icon fa-container"><span class="text-accent-color btn-disable-hover"><i class="fa fa-server fa-4x fa-fw"></i></span></div><div class="icon-box-content"><div class="icon-box-heading icon-box-fa-4x"><h3 class="h3">On - premise</h3></div><p class="text-lead">Deployed on your servers or personal computers</p></div></div><span class="btn-container" ><a href="https://www.arcan.tech/on-premise-trial/" class="custom-link btn border-width-0 btn-accent btn-icon-left" title="On premise trial" target="_blank">DOWNLOAD</a></span></div></div></div></div></div><div class="wpb_column pos-top pos-center align_center column_parent col-lg-6 boomapps_vccolumn col-md-33 half-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  vc_custom_1657190352298 boomapps_vccolumn border-color-gyho-color single-block-padding" style="border-style: solid;"><div class="uncont"><div class="icon-box icon-box-top" ><div class="icon-box-icon fa-container"><span class="text-accent-color btn-disable-hover"><i class="fa fa-cloud2 fa-4x fa-fw"></i></span></div><div class="icon-box-content"><div class="icon-box-heading icon-box-fa-4x"><h3 class="h3">Cloud</h3></div><p class="text-lead">Online access to dedicated and isolated Arcan instance</p></div></div><span class="btn-container" ><a href="mailto:sales@arcan.tech" class="custom-link btn border-width-0 btn-accent btn-icon-left" title="Arcan cloud" target="_blank">ASK US</a></span></div></div></div></div></div><script id="script-131843" data-row="script-131843" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-131843"));</script></div></div></div><div data-parent="true" class="vc_row row-container has-dividers boomapps_vcrow" style="z-index: 1;"><div class="uncode-divider-wrap uncode-divider-wrap-top z_index_0" style="height: 20%;" data-height="20" data-unit="%"><svg version="1.1" class="uncode-row-divider uncode-row-divider-gradient" x="0px" y="0px" width="240px" height="24px" viewBox="0 0 240 24" enable-background="new 0 0 240 24" xml:space="preserve" preserveAspectRatio="none">
+		<linearGradient id="svg-gradient-621314" gradientUnits="userSpaceOnUse" x1="119.9995" y1="0" x2="119.9995" y2="24.0005">
+			<stop  offset="0" style="stop-color:#f7f7f7;stop-opacity:0"/>
+			<stop  offset="1" style="stop-color:#f7f7f7"/>
+		</linearGradient>
+		<path fill="url(#svg-gradient-621314)" d="M240,24V0H0v24H240z"/>
+		</svg></div><div class="row quad-top-padding quad-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_parent col-lg-12 boomapps_vccolumn double-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h2" ><span>Main features</span></h2></div><div class="clear"></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row col-double-gutter row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_child col-lg-4 boomapps_vccolumn col-md-33 single-internal-gutter"><div class="uncol style-light font-329340 animate_when_almost_visible zoom-in" data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-center"><div class="single-wrapper" style="max-width: 60%;"><div class="tmb tmb-light  tmb-img-ratio tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper"><div class="dummy" style="padding-top: 100%;"></div>
+									<img decoding="async" class="wp-image-82658" src="https://www.arcan.tech/wp-content/uploads/2020/09/974-uai-516x516.png" width="516" height="516" alt=""></div>
+				</div>
+			</div></div>
+					</div></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h6 font-weight-500 text-uppercase" ><span><span style="font-weight: 400;">Architectural smell detection</span></span></h3><div><p>Identify and quantify the source of the most severe kind of technical debt to optimize your maintenance strategy on the long-term.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div><div class="wpb_column pos-top pos-center align_center column_child col-lg-4 boomapps_vccolumn col-md-33 single-internal-gutter"><div class="uncol style-light font-329340 animate_when_almost_visible zoom-in" data-delay="400"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-center"><div class="single-wrapper" style="max-width: 60%;"><div class="tmb tmb-light  tmb-img-ratio tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper"><div class="dummy" style="padding-top: 100%;"></div>
+									<img decoding="async" class="wp-image-82660" src="https://www.arcan.tech/wp-content/uploads/2020/09/855-uai-516x516.png" width="516" height="516" alt=""></div>
+				</div>
+			</div></div>
+					</div></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h6 font-weight-500 text-uppercase" ><span><span style="font-weight: 400;">Evolution analysis</span></span></h3><div><p>Spot historical trends and issues by associating arcan with your favourite VCS.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div><div class="wpb_column pos-top pos-center align_center column_child col-lg-4 boomapps_vccolumn col-md-33 single-internal-gutter"><div class="uncol style-light font-329340 animate_when_almost_visible zoom-in" data-delay="600"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-center"><div class="single-wrapper" style="max-width: 60%;"><div class="tmb tmb-light  tmb-img-ratio tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper"><div class="dummy" style="padding-top: 100%;"></div>
+									<img decoding="async" class="wp-image-82661" src="https://www.arcan.tech/wp-content/uploads/2020/09/1056-e1657532605566.png" width="500" height="500" alt="" srcset="https://www.arcan.tech/wp-content/uploads/2020/09/1056-e1657532605566.png 500w, https://www.arcan.tech/wp-content/uploads/2020/09/1056-e1657532605566-300x300.png 300w, https://www.arcan.tech/wp-content/uploads/2020/09/1056-e1657532605566-150x150.png 150w" sizes="(max-width: 500px) 100vw, 500px" /></div>
+				</div>
+			</div></div>
+					</div></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h6 font-weight-500 text-uppercase" ><span><span style="font-weight: 400;">Technical debt evaluation</span></span></h3><div><p>Keep an eye on architecture erosion with our estimation of technical debt to avoid extra costs in maintaining your systems.</p>
+</div></div><div class="clear"></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><script id="script-981951" data-row="script-981951" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-981951"));</script></div></div></div><div data-parent="true" class="vc_row style-accent-bg row-container with-parallax boomapps_vcrow"><div class="row-background background-element">
+											<div class="background-wrapper">
+												<div class="background-inner" style="background-image: url(https://www.arcan.tech/wp-content/uploads/2020/09/340_50.png);background-repeat: no-repeat;background-position: center center;background-size: cover;"></div>
+												<div class="block-bg-overlay style-accent-bg" style="opacity: 0.8;"></div>
+											</div>
+										</div><div class="row unequal col-double-gutter quad-top-padding quad-bottom-padding single-h-padding limit-width row-parent" data-height-ratio="50"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h6 class="h6 text-uppercase" ><span>QUALITY ASSESSMENT SERVICE</span></h6></div><div class="clear"></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h1" ><span>Are you in need of a one-time quality assessment? Explore our comprehensive offer that addresses software quality, including technical debt and cyber security.</span></h3></div><div class="clear"></div></div><span class="btn-container" ><a href="https://www.arcan.tech/one-time-quality-assessment/" class="custom-link btn border-width-0 btn-default btn-round btn-icon-left" title="One-time quality assessment" target="_blank">Learn more</a></span></div></div></div></div></div><script id="script-107852" data-row="script-107852" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-107852"));</script></div></div></div><div data-parent="true" class="vc_row row-container boomapps_vcrow"><div class="row limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_left column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode_text_column" ><style type="text/css">.zoom-instagram.feed-83033{font-size:14px!important;padding:1px!important;}.zoom-instagram.feed-83033 .zoom-instagram-widget__items{gap:10px!important;}.zoom-instagram.feed-83033 .zoom-instagram-widget__items img {width:240px!important;}.zoom-instagram.feed-83033 .zoom-instagram-widget__items.layout-fullwidth{grid-template-columns:repeat(9,1fr);}</style>
+<div class="zoom-instagram feed-83033 layout-fullwidth columns-3 with-lightbox spacing-10 perpage-3"><header class="zoom-instagram-widget__header"><div class="zoom-instagram-widget__header-column-right"><h5 class="zoom-instagram-widget__header-name"></h5><p class="zoom-instagram-widget__header-user"><a href="https://www.instagram.com/arcan_tech" target="_blank" rel="nofollow">@arcan_tech</a></p><div class="zoom-instagram-widget__header-bio"></div></div></header><div class="zoom-instagram-widget__items-wrapper"><ul class="zoom-instagram-widget__items zoom-instagram-widget__items--no-js layout-fullwidth" data-layout="fullwidth" data-columns="3" data-lightbox="1" data-spacing="10" data-perpage="3"><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/333865356_606131164693474_7399649604527140827_n-320x320.jpg" data-mfp-src="17978479400006316" width="320" height="320" alt="Last Thursday, we were guests with Heimdall AI and VOLTA Structural Energy at the second roadshow of Business Innovation Factory 2023, @leonardo_company&#039;s acceleration program in collaboration with LVenture Group.
+
+💡 We discussed the concrete results we achieved through the program&#039;s first edition and the advantage of being guests at the @thehublventuregroup in Rome, a real center of innovation and contamination.
+
+We thank Leonardo and LVenture Group for the invitation and wish good luck to the startups applying to the program!" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CpR7MK8ITu6/" rel="noopener nofollow" target="_blank" title="Last Thursday, we were guests with Heimdall AI and VOLTA Structural Energy at the second roadshow of Business Innovation Factory 2023, @leonardo_company&#039;s acceleration program in collaboration with LVenture Group.
+
+💡 We discussed the concrete results we achieved through the program&#039;s first edition and the advantage of being guests at the @thehublventuregroup in Rome, a real center of innovation and contamination.
+
+We thank Leonardo and LVenture Group for the invitation and wish good luck to the startups applying to the program!"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/333865356_606131164693474_7399649604527140827_n-320x320.jpg" data-mfp-src="17978479400006316" href="https://www.instagram.com/p/CpR7MK8ITu6/" target="_blank" rel="noopener nofollow" title="Last Thursday, we were guests with Heimdall AI and VOLTA Structural Energy at the second roadshow of Business Innovation Factory 2023, @leonardo_company&#039;s acceleration program in collaboration with LVenture Group.
+
+💡 We discussed the concrete results we achieved through the program&#039;s first edition and the advantage of being guests at the @thehublventuregroup in Rome, a real center of innovation and contamination.
+
+We thank Leonardo and LVenture Group for the invitation and wish good luck to the startups applying to the program!"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/324696359_721995456015580_4649091065764343314_n-320x168.jpg" data-mfp-src="17938851461536944" width="320" height="168" alt="The Arcan team wishes you a happy new year!
+
+We start 2023 with some news 📣📣
+The Arcan new documentation site is now available on our website!
+
+With a new layout and additional contents, it is the ultimate guide to managing Architectural Technical Debt with Arcan.
+
+Download Arcan and start detecting Technical Debt! Linkinbio
+
+#technicaldebt #docs #newyear #softwareengineering" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CnO4mzjMZam/" rel="noopener nofollow" target="_blank" title="The Arcan team wishes you a happy new year!
+
+We start 2023 with some news 📣📣
+The Arcan new documentation site is now available on our website!
+
+With a new layout and additional contents, it is the ultimate guide to managing Architectural Technical Debt with Arcan.
+
+Download Arcan and start detecting Technical Debt! Linkinbio
+
+#technicaldebt #docs #newyear #softwareengineering"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/324696359_721995456015580_4649091065764343314_n-320x168.jpg" data-mfp-src="17938851461536944" href="https://www.instagram.com/p/CnO4mzjMZam/" target="_blank" rel="noopener nofollow" title="The Arcan team wishes you a happy new year!
+
+We start 2023 with some news 📣📣
+The Arcan new documentation site is now available on our website!
+
+With a new layout and additional contents, it is the ultimate guide to managing Architectural Technical Debt with Arcan.
+
+Download Arcan and start detecting Technical Debt! Linkinbio
+
+#technicaldebt #docs #newyear #softwareengineering"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/317711025_897122958123187_8471796371585441820_n-320x196.jpg" data-mfp-src="17967453887002747" width="320" height="196" alt="📣📣 Trial release alert!
+
+Do you want to automatically detect the Technical Debt of your software?
+
+Our 30-day trial is now available online for free! ✨
+
+Try Arcan directly on your machine. Available for Java, C, C++, and C#. Linkinbio.
+
+Start tackling your Technical Debt today!
+
+#technicaldebt #trial #softwarequality #softwareanalysis" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CllYPrsIg3E/" rel="noopener nofollow" target="_blank" title="📣📣 Trial release alert!
+
+Do you want to automatically detect the Technical Debt of your software?
+
+Our 30-day trial is now available online for free! ✨
+
+Try Arcan directly on your machine. Available for Java, C, C++, and C#. Linkinbio.
+
+Start tackling your Technical Debt today!
+
+#technicaldebt #trial #softwarequality #softwareanalysis"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/317711025_897122958123187_8471796371585441820_n-320x196.jpg" data-mfp-src="17967453887002747" href="https://www.instagram.com/p/CllYPrsIg3E/" target="_blank" rel="noopener nofollow" title="📣📣 Trial release alert!
+
+Do you want to automatically detect the Technical Debt of your software?
+
+Our 30-day trial is now available online for free! ✨
+
+Try Arcan directly on your machine. Available for Java, C, C++, and C#. Linkinbio.
+
+Start tackling your Technical Debt today!
+
+#technicaldebt #trial #softwarequality #softwareanalysis"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="carousel_album"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/313935905_3403080919962436_4113430567261282465_n-320x320.jpg" data-mfp-src="17940487538430290" width="320" height="320" alt="Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><svg class="svg-icon" shape-rendering="geometricPrecision"><use xlink:href="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/frontend/wpzoom-instagram-icons.svg#carousel_album"></use></svg><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CkbWXOPs_PM/" rel="noopener nofollow" target="_blank" title="Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/313935905_3403080919962436_4113430567261282465_n-320x320.jpg" data-mfp-src="17940487538430290" href="https://www.instagram.com/p/CkbWXOPs_PM/" target="_blank" rel="noopener nofollow" title="Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/312143623_664493241691703_8203664755441682712_n-254x320.jpg" data-mfp-src="17868113024790628" width="254" height="320" alt="LEONARDO + ARCAN = INNOVATION
+
+Special thanks to Giuliano Angeletti, our super mentor!" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/Cj8SqauoPbI/" rel="noopener nofollow" target="_blank" title="LEONARDO + ARCAN = INNOVATION
+
+Special thanks to Giuliano Angeletti, our super mentor!"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/312143623_664493241691703_8203664755441682712_n-254x320.jpg" data-mfp-src="17868113024790628" href="https://www.instagram.com/p/Cj8SqauoPbI/" target="_blank" rel="noopener nofollow" title="LEONARDO + ARCAN = INNOVATION
+
+Special thanks to Giuliano Angeletti, our super mentor!"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="carousel_album"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/312303073_1264652281039985_4097412952719553277_n-320x320.jpg" data-mfp-src="17966175037840554" width="320" height="320" alt="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><svg class="svg-icon" shape-rendering="geometricPrecision"><use xlink:href="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/frontend/wpzoom-instagram-icons.svg#carousel_album"></use></svg><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/Cj8RK1AI4JI/" rel="noopener nofollow" target="_blank" title="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/312303073_1264652281039985_4097412952719553277_n-320x320.jpg" data-mfp-src="17966175037840554" href="https://www.instagram.com/p/Cj8RK1AI4JI/" target="_blank" rel="noopener nofollow" title="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/311466907_439975128031758_4312666211662889377_n-320x320.jpg" data-mfp-src="17858708840791767" width="320" height="320" alt="Demo day is only one week away. We are working to finalize our pitch to present to @leonardo_company.
+
+But we won&#039;t stop there! In the next month we will finalize the development of Arcan for Python, one of the many achievements obtained during the journey within the Business Innovation Factory.
+
+Book a demo to find out how Arcan can benefit your team!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality #python" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CjndReVI_QM/" rel="noopener nofollow" target="_blank" title="Demo day is only one week away. We are working to finalize our pitch to present to @leonardo_company.
+
+But we won&#039;t stop there! In the next month we will finalize the development of Arcan for Python, one of the many achievements obtained during the journey within the Business Innovation Factory.
+
+Book a demo to find out how Arcan can benefit your team!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality #python"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/311466907_439975128031758_4312666211662889377_n-320x320.jpg" data-mfp-src="17858708840791767" href="https://www.instagram.com/p/CjndReVI_QM/" target="_blank" rel="noopener nofollow" title="Demo day is only one week away. We are working to finalize our pitch to present to @leonardo_company.
+
+But we won&#039;t stop there! In the next month we will finalize the development of Arcan for Python, one of the many achievements obtained during the journey within the Business Innovation Factory.
+
+Book a demo to find out how Arcan can benefit your team!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality #python"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/309982212_460772252680040_5462882560055738479_n-320x320.jpg" data-mfp-src="17922803447594603" width="320" height="320" alt="We are -20 days away from the end of Leonardo&#039;s BIF accelerator program, and we are constantly working harder!
+
+Yesterday, our product manager @darius.fen.daniel was at the headquarters of @leonardo_company’s Electronics division to carry on an Arcan trial on the field. Trials are crucial for us to get industrial validation and continuous feedback.
+
+A special mention to Giuliano Angeletti, our acceleration mentor and personal superhero. He manages to guide us, coordinate the relationship with Leonardo, and turn opportunities into concrete projects in addition to his daily work. Thank you!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CjH18nhsNf_/" rel="noopener nofollow" target="_blank" title="We are -20 days away from the end of Leonardo&#039;s BIF accelerator program, and we are constantly working harder!
+
+Yesterday, our product manager @darius.fen.daniel was at the headquarters of @leonardo_company’s Electronics division to carry on an Arcan trial on the field. Trials are crucial for us to get industrial validation and continuous feedback.
+
+A special mention to Giuliano Angeletti, our acceleration mentor and personal superhero. He manages to guide us, coordinate the relationship with Leonardo, and turn opportunities into concrete projects in addition to his daily work. Thank you!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/309982212_460772252680040_5462882560055738479_n-320x320.jpg" data-mfp-src="17922803447594603" href="https://www.instagram.com/p/CjH18nhsNf_/" target="_blank" rel="noopener nofollow" title="We are -20 days away from the end of Leonardo&#039;s BIF accelerator program, and we are constantly working harder!
+
+Yesterday, our product manager @darius.fen.daniel was at the headquarters of @leonardo_company’s Electronics division to carry on an Arcan trial on the field. Trials are crucial for us to get industrial validation and continuous feedback.
+
+A special mention to Giuliano Angeletti, our acceleration mentor and personal superhero. He manages to guide us, coordinate the relationship with Leonardo, and turn opportunities into concrete projects in addition to his daily work. Thank you!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality"></a>
+    					</div></div></li><li class="zoom-instagram-widget__item media-icons-normal media-icons-hover" data-media-type="image"><div class="zoom-instagram-widget__item-inner-wrap"><img class="zoom-instagram-link zoom-instagram-link-new"  data-src="https://www.arcan.tech/wp-content/uploads/2020/09/306382484_1026960547950126_1135338802200547427_n-320x320.jpg" data-mfp-src="18174729217218070" width="320" height="320" alt="Who can use Arcan?
+
+Any company that bases its business on a software product.
+Technical Debt management is essential to scale quickly and be ready for time to market.
+
+Yesterday we explained to Leonardo how Arcan supports both managers and developers in managing such debt. It was an amazing opportunity to meet with experienced professionals and get valuable feedback.
+
+Thank you again @leonardo_company and @thehublventuregroup!
+
+#sneakpeek #acceleration #businessinnovationfactory #technicaldebt #softwarequality" /><div class="hover-layout zoom-instagram-widget__overlay zoom-instagram-widget__black small"><div class="zoom-instagram-icon-wrap"><a class="zoom-svg-instagram-stroke" href="https://www.instagram.com/p/CiR7eb_swkf/" rel="noopener nofollow" target="_blank" title="Who can use Arcan?
+
+Any company that bases its business on a software product.
+Technical Debt management is essential to scale quickly and be ready for time to market.
+
+Yesterday we explained to Leonardo how Arcan supports both managers and developers in managing such debt. It was an amazing opportunity to meet with experienced professionals and get valuable feedback.
+
+Thank you again @leonardo_company and @thehublventuregroup!
+
+#sneakpeek #acceleration #businessinnovationfactory #technicaldebt #softwarequality"></a></div>
+    					<a class="zoom-instagram-link" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/306382484_1026960547950126_1135338802200547427_n-320x320.jpg" data-mfp-src="18174729217218070" href="https://www.instagram.com/p/CiR7eb_swkf/" target="_blank" rel="noopener nofollow" title="Who can use Arcan?
+
+Any company that bases its business on a software product.
+Technical Debt management is essential to scale quickly and be ready for time to market.
+
+Yesterday we explained to Leonardo how Arcan supports both managers and developers in managing such debt. It was an amazing opportunity to meet with experienced professionals and get valuable feedback.
+
+Thank you again @leonardo_company and @thehublventuregroup!
+
+#sneakpeek #acceleration #businessinnovationfactory #technicaldebt #softwarequality"></a>
+    					</div></div></li></ul></div><div class="zoom-instagram-widget__footer"><a href="https://www.instagram.com/arcan_tech" target="_blank" rel="noopener nofollow" class="wpz-button wpz-button-primary wpz-insta-view-on-insta-button"><span class="button-icon zoom-svg-instagram-stroke"></span> View on Instagram</a></div><div class="wpz-insta-lightbox-wrapper mfp-hide"><div class="swiper"><div class="swiper-wrapper"><div data-uid="17978479400006316" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/333865356_606131164693474_7399649604527140827_n.jpg" alt="Last Thursday, we were guests with Heimdall AI and VOLTA Structural Energy at the second roadshow of Business Innovation Factory 2023, @leonardo_company&#039;s acceleration program in collaboration with LVenture Group.
+
+💡 We discussed the concrete results we achieved through the program&#039;s first edition and the advantage of being guests at the @thehublventuregroup in Rome, a real center of innovation and contamination.
+
+We thank Leonardo and LVenture Group for the invitation and wish good luck to the startups applying to the program!"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">Last Thursday, we were guests with Heimdall AI and VOLTA Structural Energy at the second roadshow of Business Innovation Factory 2023, @leonardo_company&#039;s acceleration program in collaboration with LVenture Group.
+
+💡 We discussed the concrete results we achieved through the program&#039;s first edition and the advantage of being guests at the @thehublventuregroup in Rome, a real center of innovation and contamination.
+
+We thank Leonardo and LVenture Group for the invitation and wish good luck to the startups applying to the program!</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CpR7MK8ITu6/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">1/9</div>
+					</div></div></div></div><div data-uid="17938851461536944" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/324696359_721995456015580_4649091065764343314_n.jpg" alt="The Arcan team wishes you a happy new year!
+
+We start 2023 with some news 📣📣
+The Arcan new documentation site is now available on our website!
+
+With a new layout and additional contents, it is the ultimate guide to managing Architectural Technical Debt with Arcan.
+
+Download Arcan and start detecting Technical Debt! Linkinbio
+
+#technicaldebt #docs #newyear #softwareengineering"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">The Arcan team wishes you a happy new year!
+
+We start 2023 with some news 📣📣
+The Arcan new documentation site is now available on our website!
+
+With a new layout and additional contents, it is the ultimate guide to managing Architectural Technical Debt with Arcan.
+
+Download Arcan and start detecting Technical Debt! Linkinbio
+
+#technicaldebt #docs #newyear #softwareengineering</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CnO4mzjMZam/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">2/9</div>
+					</div></div></div></div><div data-uid="17967453887002747" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/317711025_897122958123187_8471796371585441820_n.jpg" alt="📣📣 Trial release alert!
+
+Do you want to automatically detect the Technical Debt of your software?
+
+Our 30-day trial is now available online for free! ✨
+
+Try Arcan directly on your machine. Available for Java, C, C++, and C#. Linkinbio.
+
+Start tackling your Technical Debt today!
+
+#technicaldebt #trial #softwarequality #softwareanalysis"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">📣📣 Trial release alert!
+
+Do you want to automatically detect the Technical Debt of your software?
+
+Our 30-day trial is now available online for free! ✨
+
+Try Arcan directly on your machine. Available for Java, C, C++, and C#. Linkinbio.
+
+Start tackling your Technical Debt today!
+
+#technicaldebt #trial #softwarequality #softwareanalysis</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CllYPrsIg3E/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">3/9</div>
+					</div></div></div></div><div data-uid="17940487538430290" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><div class="swiper" style="height: 100%;"><div class="swiper-wrapper wpz-insta-album-images"><div class="swiper-slide wpz-insta-album-image" data-media-type="image"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://scontent-mxp1-1.cdninstagram.com/v/t51.29350-15/313935905_3403080919962436_4113430567261282465_n.webp?stp=dst-jpg&#038;_nc_cat=108&#038;ccb=1-7&#038;_nc_sid=18de74&#038;_nc_ohc=j6ajZEBEB_MAX_v_ChY&#038;_nc_ht=scontent-mxp1-1.cdninstagram.com&#038;edm=ANo9K5cEAAAA&#038;oh=00_AfDdTzXqgrmfNds9XT_GHXYR19jI-Hy8PdjrbX9gRjqWLA&#038;oe=66058D50" alt="Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div><div class="swiper-slide wpz-insta-album-image" data-media-type="image"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://scontent-mxp2-1.cdninstagram.com/v/t51.29350-15/313404883_3351797231771899_5712501192162231351_n.webp?stp=dst-jpg&#038;_nc_cat=101&#038;ccb=1-7&#038;_nc_sid=18de74&#038;_nc_ohc=JT2BqNS8F58AX_Ut-Sg&#038;_nc_ht=scontent-mxp2-1.cdninstagram.com&#038;edm=ANo9K5cEAAAA&#038;oh=00_AfBUSdRhI9yCrNO9c-HtG84UHDlHza5Vj_YQ6kt1gEM3Tg&#038;oe=660542C6" alt="Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div></div><div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">Here we are!
+
+We are excited to participate in WebSummit LLC.
+
+Three days of sharing and learning at the world&#039;s most dynamic tech conference.
+
+Stay tuned to see more!
+
+#tech #websummit #technicaldebt</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CkbWXOPs_PM/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">4/9</div>
+					</div></div></div></div><div data-uid="17868113024790628" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/312143623_664493241691703_8203664755441682712_n.jpg" alt="LEONARDO + ARCAN = INNOVATION
+
+Special thanks to Giuliano Angeletti, our super mentor!"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">LEONARDO + ARCAN = INNOVATION
+
+Special thanks to Giuliano Angeletti, our super mentor!</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/Cj8SqauoPbI/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">5/9</div>
+					</div></div></div></div><div data-uid="17966175037840554" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><div class="swiper" style="height: 100%;"><div class="swiper-wrapper wpz-insta-album-images"><div class="swiper-slide wpz-insta-album-image" data-media-type="image"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://scontent-mxp2-1.cdninstagram.com/v/t51.29350-15/312303073_1264652281039985_4097412952719553277_n.jpg?_nc_cat=110&#038;ccb=1-7&#038;_nc_sid=18de74&#038;_nc_ohc=LpGkD7invYIAX9MqJPZ&#038;_nc_ht=scontent-mxp2-1.cdninstagram.com&#038;edm=ANo9K5cEAAAA&#038;oh=00_AfBsMV-DX_J5pjpNPf15urMMECNE6jhGR_gnFBHPdAADMA&#038;oe=6605407E" alt="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div><div class="swiper-slide wpz-insta-album-image" data-media-type="image"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://scontent-mxp1-1.cdninstagram.com/v/t51.29350-15/311893586_519742033309475_3231322779415859607_n.jpg?_nc_cat=103&#038;ccb=1-7&#038;_nc_sid=18de74&#038;_nc_ohc=83OBrWxyHDYAX9QZGfo&#038;_nc_ht=scontent-mxp1-1.cdninstagram.com&#038;edm=ANo9K5cEAAAA&#038;oh=00_AfCNtkTPQB9Qwsr8LcbbrwNLFunngyFwWpwqcOvP8oADgQ&#038;oe=6604D7E9" alt="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div><div class="swiper-slide wpz-insta-album-image" data-media-type="image"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://scontent-mxp2-1.cdninstagram.com/v/t51.29350-15/312221561_669770354543332_1355900020466868170_n.jpg?_nc_cat=111&#038;ccb=1-7&#038;_nc_sid=18de74&#038;_nc_ohc=5PECD5VpgjMAX_9pRdu&#038;_nc_ht=scontent-mxp2-1.cdninstagram.com&#038;edm=ANo9K5cEAAAA&#038;oh=00_AfBn_AUsMEWyc9rXb-YrhwrYH5Lh3eCT0Vl1pBoq5uwoEQ&#038;oe=66063ADC" alt="This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div></div><div class="swiper-pagination"></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">This is it!
+
+Yesterday with the demo day ended our journey within the Business Innovation Factory.
+
+It has been an intense and productive five months during which we have achieved significant results.
+
+It doesn&#039;t end here! Arcan&#039;s growth has just begun.
+
+Thank you to @leonardo_company and @thehublventuregroup for this fantastic opportunity, and most importantly, thank you to all the people who supported us!
+
+#acceleration #Leonardo4Innovation #technicaldebt #softwarequality #startups</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/Cj8RK1AI4JI/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">6/9</div>
+					</div></div></div></div><div data-uid="17858708840791767" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/311466907_439975128031758_4312666211662889377_n.jpg" alt="Demo day is only one week away. We are working to finalize our pitch to present to @leonardo_company.
+
+But we won&#039;t stop there! In the next month we will finalize the development of Arcan for Python, one of the many achievements obtained during the journey within the Business Innovation Factory.
+
+Book a demo to find out how Arcan can benefit your team!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality #python"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">Demo day is only one week away. We are working to finalize our pitch to present to @leonardo_company.
+
+But we won&#039;t stop there! In the next month we will finalize the development of Arcan for Python, one of the many achievements obtained during the journey within the Business Innovation Factory.
+
+Book a demo to find out how Arcan can benefit your team!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality #python</div><div class="wpz-insta-date">1 year ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CjndReVI_QM/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">7/9</div>
+					</div></div></div></div><div data-uid="17922803447594603" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/309982212_460772252680040_5462882560055738479_n.jpg" alt="We are -20 days away from the end of Leonardo&#039;s BIF accelerator program, and we are constantly working harder!
+
+Yesterday, our product manager @darius.fen.daniel was at the headquarters of @leonardo_company’s Electronics division to carry on an Arcan trial on the field. Trials are crucial for us to get industrial validation and continuous feedback.
+
+A special mention to Giuliano Angeletti, our acceleration mentor and personal superhero. He manages to guide us, coordinate the relationship with Leonardo, and turn opportunities into concrete projects in addition to his daily work. Thank you!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">We are -20 days away from the end of Leonardo&#039;s BIF accelerator program, and we are constantly working harder!
+
+Yesterday, our product manager @darius.fen.daniel was at the headquarters of @leonardo_company’s Electronics division to carry on an Arcan trial on the field. Trials are crucial for us to get industrial validation and continuous feedback.
+
+A special mention to Giuliano Angeletti, our acceleration mentor and personal superhero. He manages to guide us, coordinate the relationship with Leonardo, and turn opportunities into concrete projects in addition to his daily work. Thank you!
+
+#acceleration #businessinnovationfactory #technicaldebt #softwarequality</div><div class="wpz-insta-date">2 years ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CjH18nhsNf_/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">8/9</div>
+					</div></div></div></div><div data-uid="18174729217218070" class="swiper-slide wpz-insta-lightbox-item"><div class="wpz-insta-lightbox"><div class="image-wrapper"><img class="wpzoom-swiper-image swiper-lazy" data-src="https://www.arcan.tech/wp-content/uploads/2020/09/306382484_1026960547950126_1135338802200547427_n.jpg" alt="Who can use Arcan?
+
+Any company that bases its business on a software product.
+Technical Debt management is essential to scale quickly and be ready for time to market.
+
+Yesterday we explained to Leonardo how Arcan supports both managers and developers in managing such debt. It was an amazing opportunity to meet with experienced professionals and get valuable feedback.
+
+Thank you again @leonardo_company and @thehublventuregroup!
+
+#sneakpeek #acceleration #businessinnovationfactory #technicaldebt #softwarequality"/><div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div></div>
+					<div class="details-wrapper">
+					<div class="wpz-insta-header">
+						<div class="wpz-insta-avatar">
+							<img decoding="async" src="https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/images/backend/icon-insta.png" alt="@arcan_tech" width="42" height="42"/>
+						</div>
+						<div class="wpz-insta-buttons">
+							<div class="wpz-insta-username">
+								<a rel="noopener" target="_blank" href="https://instagram.com/arcan_tech">@arcan_tech</a>
+							</div>
+							<div>&bull;</div>
+							<div class="wpz-insta-follow">
+								<a target="_blank" rel="noopener"
+								href="https://instagram.com/arcan_tech?ref=badge">
+									Follow
+								</a>
+							</div>
+						</div>
+					</div><div class="wpz-insta-caption">Who can use Arcan?
+
+Any company that bases its business on a software product.
+Technical Debt management is essential to scale quickly and be ready for time to market.
+
+Yesterday we explained to Leonardo how Arcan supports both managers and developers in managing such debt. It was an amazing opportunity to meet with experienced professionals and get valuable feedback.
+
+Thank you again @leonardo_company and @thehublventuregroup!
+
+#sneakpeek #acceleration #businessinnovationfactory #technicaldebt #softwarequality</div><div class="wpz-insta-date">2 years ago</div><div class="view-post">
+					<a href="https://www.instagram.com/p/CiR7eb_swkf/" target="_blank" rel="noopener"><span class="dashicons dashicons-instagram"></span>View on Instagram</a>
+					<span class="delimiter">|</span>
+					<div class="wpz-insta-pagination">9/9</div>
+					</div></div></div></div></div><div class="swiper-button-prev"></div><div class="swiper-button-next"></div></div></div></div>
+</div></div></div></div></div></div><script id="script-610072" data-row="script-610072" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-610072"));</script></div></div></div><div data-parent="true" class="vc_row style-color-lxmt-bg row-container boomapps_vcrow"><div class="row no-top-padding no-bottom-padding no-h-padding row-slider row-parent"><div class="owl-carousel-wrapper style-light"><div class="uncode-slider owl-carousel-container owl-dots-inside owl-dots-align-center"><div id="uslider_1186800351" class="owl-carousel owl-element owl-dots-inside owl-height-auto" data-loop="false" data-autoheight="true" data-nav="true" data-dotsmobile="true" data-dots="true" data-navspeed="1000" data-autoplay="true" data-timeout="5000" data-lg="1" data-md="1" data-sm="1" data-limit-width="false"><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row col-double-gutter quad-top-padding quad-bottom-padding single-h-padding row-child limit-width"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_child col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont" style="max-width:900px;"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h1" ><span>Optimize your maintenance costs in developing your architecture</span></h2></div><div class="clear"></div></div><div class="uncode_text_column text-lead" ><p>Try Arcan to automatically detect architectural anomalies and manage technical debt.</p>
+</div></div></div></div></div></div></div></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row col-double-gutter quad-top-padding quad-bottom-padding single-h-padding row-child limit-width"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_child col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont" style="max-width:900px;"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h1" ><span>Ensure the scalability of the requirements of your application</span></h2></div><div class="clear"></div></div><div class="uncode_text_column text-lead" ><p>Develop sustainable solutions to quickly adapt to evolving requirements.</p>
+</div></div></div></div></div></div></div></div></div><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row col-double-gutter quad-top-padding quad-bottom-padding single-h-padding row-child limit-width"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_center column_child col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont" style="max-width:900px;"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h2 class="h1" ><span>Data-driven architecture evolution</span></h2></div><div class="clear"></div></div><div class="uncode_text_column text-lead" ><p>Fully automated architectural assessment based on source code analysis.</p>
+</div></div></div></div></div></div></div></div></div></div><div class="uncode_slider-dot_classes single-h-padding owl-dots-classes"></div></div></div><script id="script-437656" data-row="script-437656" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-437656"));</script></div></div><div data-parent="true" class="vc_row row-container boomapps_vcrow" style="z-index: 1;"><div class="row col-double-gutter quad-top-padding quad-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_left column_parent col-lg-5 boomapps_vccolumn col-md-50 single-internal-gutter"><div class="uncol style-light animate_when_almost_visible bottom-t-top"  data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-left"><div class="single-wrapper" style="max-width: 100%;"><div class="tmb tmb-light  tmb-img-ratio tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper"><div class="dummy" style="padding-top: 100%;"></div>
+									<img decoding="async" class="wp-image-82665" src="https://www.arcan.tech/wp-content/uploads/2020/09/857-uai-1032x1032.png" width="1032" height="1032" alt=""></div>
+				</div>
+			</div></div>
+					</div></div></div></div></div></div></div></div><div class="wpb_column pos-middle pos-center align_left align_center_mobile column_parent col-lg-7 boomapps_vccolumn col-md-50 half-internal-gutter"><div class="uncol style-light font-329340 animate_when_almost_visible bottom-t-top"  data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h5 class="h6 font-weight-500 text-accent-color text-uppercase" ><span><span style="font-weight: 400;">For Developers</span> &amp; Architects</span></h5></div><div class="clear"></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h1 font-weight-500" ><span><span style="font-weight: 400;">Architecture analysis for all your needs</span></span></h3><div><p>Software metrics evaluation, architecture drift identification and more: Arcan supports you in the most complex and critical phases of development, architecture evolution and maintenance. Discover all Arcan features.</p>
+</div></div><div class="clear"></div></div><div class="empty-space empty-single tablet-hidden mobile-hidden" ><span class="empty-space-inner"></span></div>
+
+	<div class="wpb_raw_code wpb_content_element wpb_raw_html" >
+		<div class="wpb_wrapper">
+			<a href="https://www.arcan.tech/product_overview/">Learn More →</a>
+		</div>
+	</div>
+</div></div></div></div></div><script id="script-210261" data-row="script-210261" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-210261"));</script></div></div></div><div data-parent="true" class="vc_row inverted-device-order style-color-lxmt-bg row-container boomapps_vcrow"><div class="row col-double-gutter quad-top-padding quad-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_left align_center_mobile column_parent col-lg-7 boomapps_vccolumn col-md-50 half-internal-gutter"><div class="uncol style-light font-329340 animate_when_almost_visible bottom-t-top"  data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h5 class="h6 font-weight-500 text-accent-color text-uppercase" ><span>For managers</span></h5></div><div class="clear"></div></div><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h3 class="h1 font-weight-500" ><span><span style="font-weight: 400;">Strategic data for your business decisions</span><span></span></span></h3><div><p>Technical debt data are highly strategic and decision-enablers. For instance, the technical debt index can be used to evaluate third-party software acquisitions and to decide whether to fix or re-develop from scratch a problematic project.</p>
+</div></div><div class="clear"></div></div><div class="empty-space empty-single tablet-hidden mobile-hidden" ><span class="empty-space-inner"></span></div>
+
+	<div class="wpb_raw_code wpb_content_element wpb_raw_html" >
+		<div class="wpb_wrapper">
+			<a href="https://www.arcan.tech/solutions/by-use-case/">Learn More →</a>
+		</div>
+	</div>
+</div></div></div></div></div><div class="wpb_column pos-middle pos-center align_left column_parent col-lg-5 boomapps_vccolumn col-md-50 single-internal-gutter"><div class="uncol style-light animate_when_almost_visible bottom-t-top"  data-delay="200"><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-left"><div class="single-wrapper" style="max-width: 100%;"><div class="tmb tmb-light  tmb-img-ratio tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper"><div class="dummy" style="padding-top: 100%;"></div>
+									<img decoding="async" class="wp-image-82664" src="https://www.arcan.tech/wp-content/uploads/2020/09/854-uai-1032x1032.png" width="1032" height="1032" alt=""></div>
+				</div>
+			</div></div>
+					</div></div></div></div></div></div></div></div><script id="script-317765" data-row="script-317765" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-317765"));</script></div></div></div></div></div>
+						</div>
+					</article>
+								</div><!-- sections container -->
+							</div><!-- page wrapper -->
+												<footer id="colophon" class="site-footer">
+							<div data-parent="true" class="vc_row style-color-wayh-bg row-container boomapps_vcrow"><div class="row col-double-gutter quad-top-padding single-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_left column_parent col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-single-media  text-left"><div class="single-wrapper" style="max-width: 150px;"><div class="tmb tmb-light  tmb-media-first tmb-media-last tmb-content-overlay tmb-no-bg">
+						<div class="t-inside"><div class="t-entry-visual"><div class="t-entry-visual-tc"><div class="uncode-single-media-wrapper">
+									<img decoding="async" class="wp-image-82633" src="https://www.arcan.tech/wp-content/uploads/2020/09/Scritta-Bianca-01-uai-258x34.png" width="258" height="34" alt=""></div>
+				</div>
+			</div></div>
+					</div></div></div><div class="uncode_text_column" ><p style="text-align: left;">TXT Arcan s.r.l.<br />
+Via Milano 150, 20093, Cologno Monzese (MI)<br />
+Italy<br />
+VAT: 03989210137</p>
+<p style="text-align: left;">info@arcan.tech</p>
+</div></div></div></div></div></div><div class="wpb_column pos-top pos-center align_left column_parent col-lg-8 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_row row-internal row-container boomapps_vcrow"><div class="row row-child"><div class="wpb_row row-inner"><div class="wpb_column pos-top pos-center align_left column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h5 class="h4" ><span><strong>Why Arcan?</strong></span></h5></div><div class="clear"></div></div><div class="uncode-wrapper uncode-list" >
+<ul class="icons">
+ 	<li><i class="fa fa-arrow-right3"></i><a href="https://www.arcan.tech/product_overview/">Product</a></li>
+ 	<li><i class="fa fa-arrow-right3"></i><a href="https://www.arcan.tech/solutions/">Solutions</a></li>
+</ul>
+</div></div></div></div></div></div><div class="wpb_column pos-top pos-center align_left column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="vc_custom_heading_wrap "><div class="heading-text el-text" ><h5 class="h4" ><span><strong>Company</strong></span></h5></div><div class="clear"></div></div><div class="uncode-wrapper uncode-list" >
+<ul class="icons">
+ 	<li><i class="fa fa-arrow-right3"></i><a href="https://www.arcan.tech/about/">About</a></li>
+ 	<li><i class="fa fa-arrow-right3"></i><a href="https://www.arcan.tech/contact/">Contact</a></li>
+ 	<li><i class="fa fa-arrow-right3"></i><a href="https://www.arcan.tech/privacy-cookie-policy/">Privacy</a></li>
+</ul>
+</div></div></div></div></div></div><div class="wpb_column pos-top pos-center align_left column_child col-lg-4 boomapps_vccolumn single-internal-gutter"><div class="uncol style-dark" ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode-vc-social  icons-lead"><div class="social-icon icon-box icon-box-top icon-inline"><a href="https://twitter.com/arcan_tech" target="_blank"><i class="fa fa-twitter"></i></a></div><div class="social-icon icon-box icon-box-top icon-inline"><a href="https://www.instagram.com/arcan_tech" target="_blank"><i class="fa fa-instagram"></i></a></div><div class="social-icon icon-box icon-box-top icon-inline"><a href="https://www.youtube.com/channel/UCFgXAsJ-66Qho72qh6Y6oEg" target="_blank"><i class="fa fa-youtube-play"></i></a></div><div class="social-icon icon-box icon-box-top icon-inline"><a href="https://www.linkedin.com/company/arcan-tech/" target="_blank"><i class="fa fa-linkedin"></i></a></div></div></div></div></div></div></div></div></div></div></div></div></div></div></div><script id="script-209592" data-row="script-209592" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-209592"));</script></div></div></div><div data-parent="true" class="vc_row style-color-wayh-bg row-container boomapps_vcrow"><div class="row double-top-padding single-bottom-padding single-h-padding limit-width row-parent"><div class="wpb_row row-inner"><div class="wpb_column pos-middle pos-center align_center column_parent col-lg-12 boomapps_vccolumn single-internal-gutter"><div class="uncol style-light"  ><div class="uncoltable"><div class="uncell  boomapps_vccolumn no-block-padding"><div class="uncont"><div class="uncode_text_column" ><p>© 2021-2024 TXT Arcan |  <span style="color: #777777;"><a style="color: #777777;" href="https://www.arcan.tech/privacy-cookie-policy/">Privacy</a></span></p>
+</div>
+	<div class="wpb_raw_code wpb_content_element wpb_raw_html" >
+		<div class="wpb_wrapper">
+			<a href='https://it.freepik.com/autore/fullvector' style="color:#777777">Images created by fullvector - it.freepik.com</a>
+		</div>
+	</div>
+</div></div></div></div></div><script id="script-147687" data-row="script-147687" type="text/javascript" class="vc_controls">UNCODE.initRow(document.getElementById("script-147687"));</script></div></div></div>						</footer>
+											</div><!-- main container -->
+				</div><!-- main wrapper -->
+							</div><!-- box container -->
+		</div><!-- box wrapper -->
+		<div class="style-light footer-scroll-top"><a href="#" class="scroll-top"><i class="fa fa-angle-up fa-stack fa-rounded btn-default btn-hover-nobg"></i></a></div>		<div class="overlay overlay-sequential style-dark style-dark-bg overlay-search" data-area="search" data-container="box-container">
+			<div class="mmb-container"><div class="menu-close-search mobile-menu-button menu-button-offcanvas mobile-menu-button-dark lines-button x2 overlay-close close" data-area="search" data-container="box-container"><span class="lines"></span></div></div>
+			<div class="search-container"><form action="https://www.arcan.tech/" method="get">
+	<div class="search-container-inner">
+		<input type="search" class="search-field form-fluid no-livesearch" placeholder="Search…" value="" name="s" title="Search for:">
+	  <i class="fa fa-search3"></i>
+	</div>
+</form>
+</div>
+		</div>
+
+	
+		<script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<script type="text/html" id="wpb-modifications"> window.wpbCustomElement = 1; </script><link rel='stylesheet' id='rs-plugin-settings-css' href='https://www.arcan.tech/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.6.14' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=5.7.7' id='swv-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"https:\/\/www.arcan.tech\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/contact-form-7/includes/js/index.js?ver=5.7.7' id='contact-form-7-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/scripts/library/lazy.js?ver=1707865302' id='zoom-instagram-widget-lazy-load-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/instagram-widget-by-wpzoom/dist/scripts/frontend/index.js?ver=2.1.13' id='zoom-instagram-widget-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.6.14' defer async id='tp-tools-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.6.14' defer async id='revmin-js'></script>
+<script type='text/javascript' id='mediaelement-core-js-before'>
+var mejsL10n = {"language":"en","strings":{"mejs.download-file":"Download File","mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen":"Fullscreen","mejs.play":"Play","mejs.pause":"Pause","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.live-broadcast":"Live Broadcast","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/mediaelement/mediaelement-and-player.min.js?ver=4.2.17' id='mediaelement-core-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/mediaelement/mediaelement-migrate.min.js?ver=6.1.5' id='mediaelement-migrate-js'></script>
+<script type='text/javascript' id='mediaelement-js-extra'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/mediaelement/wp-mediaelement.min.js?ver=6.1.5' id='wp-mediaelement-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/themes/uncode/library/js/plugins.js?ver=371788608' id='uncode-plugins-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/themes/uncode/library/js/app.js?ver=371788608' id='uncode-app-js'></script>
+<script type='text/javascript' src='https://www.google.com/recaptcha/api.js?render=6LdoVc0ZAAAAAPbCx7i1-aEJVsJnxuodokjzt_n4&#038;ver=3.0' id='google-recaptcha-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/dist/vendor/regenerator-runtime.min.js?ver=0.13.9' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' id='wpcf7-recaptcha-js-extra'>
+/* <![CDATA[ */
+var wpcf7_recaptcha = {"sitekey":"6LdoVc0ZAAAAAPbCx7i1-aEJVsJnxuodokjzt_n4","actions":{"homepage":"homepage","contactform":"contactform"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/contact-form-7/modules/recaptcha/index.js?ver=5.7.7' id='wpcf7-recaptcha-js'></script>
+<script type='text/javascript' src='https://www.arcan.tech/wp-content/plugins/youtube-embed-plus/scripts/fitvids.min.js?ver=14.2.1' id='__ytprefsfitvids__-js'></script>
+</body>
+</html>
