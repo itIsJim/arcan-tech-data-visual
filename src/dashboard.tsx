@@ -2,7 +2,7 @@
 import CytoscapeComponent from "react-cytoscapejs";
 import {useQuery} from "@apollo/client";
 import {GET_DEPENDENCY_GRAPH} from "./api/queries.ts";
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {Stylesheet} from "cytoscape";
 
 
@@ -88,6 +88,8 @@ interface QueryResponse {
     projectById: ProjectById;
 }
 
+
+
 const nodeStyles = {
     container: { backgroundColor: '#82ff8f', shape: 'triangle' },
     unit: { backgroundColor: '#eb4897', shape: 'ellipse' }
@@ -97,19 +99,29 @@ const mapEdgeWeightToWidth = (weight: number) => Math.max(1, weight / 5);
 
 const Dashboard = React.memo( function Dashboard() {
     const { loading, error, data } = useQuery<QueryResponse>(GET_DEPENDENCY_GRAPH, {
-        variables: { projectId: 287, versionId: "2e718ebd3f968a675dfbc36bb4a126e13186eddf" },
+        variables: { projectId: 287, versionId: '2e718ebd3f968a675dfbc36bb4a126e13186eddf' },
     });
 
     const [layout, setLayout] = useState<string>('cose');
     const [filter, setFilter] = useState<string>('all');
+    const [refreshKey, setRefreshKey] = useState<number>(0);
 
-    const getElements = (data: QueryResponse | undefined) => {
+    const refreshLayout = useCallback(() => {
+        setRefreshKey(oldKey => oldKey + 1);
+    }, []);
+
+    useEffect(() => {
+        refreshLayout();
+    }, [filter, layout, refreshLayout]);
+    const elements = useMemo(() => {
         if (!data) return [];
 
         const { allUnits, allContainers, membershipEdges, dependencyEdges, hierarchyEdges } = data.projectById.dependencyGraph;
 
-        const unitsAndContainers = [...allUnits, ...allContainers].filter((node) => filter === 'all' || node.label === filter);
-        const nodes = unitsAndContainers.map((node) => ({
+        const filteredNodes = [...allUnits, ...allContainers].filter((node) => filter === 'all' || node.label === filter);
+        const nodeIds = new Set(filteredNodes.map(node => node.id));
+
+        const nodes = filteredNodes.map((node) => ({
             data: {
                 id: `node-${node.id}`,
                 label: node.label,
@@ -119,11 +131,8 @@ const Dashboard = React.memo( function Dashboard() {
         }));
 
         const edges = [...membershipEdges, ...dependencyEdges, ...hierarchyEdges].flatMap((edge) => {
-            const result = [];
-
-            // Handle MembershipEdge
-            if ('member' in edge) {
-                result.push({
+            if ('member' in edge && nodeIds.has(edge.member.id) && nodeIds.has(edge.parent.id)) {
+                return [{
                     data: {
                         id: `edge-${edge.id}`,
                         source: `node-${edge.member.id}`,
@@ -131,12 +140,11 @@ const Dashboard = React.memo( function Dashboard() {
                         label: edge.label,
                         width: 1,
                     }
-                });
+                }];
             }
 
-            // Handle DependencyEdge
-            if ('dependant' in edge) {
-                result.push({
+            if ('dependant' in edge && nodeIds.has(edge.dependant.id) && nodeIds.has(edge.dependedUpon.id)) {
+                return [{
                     data: {
                         id: `edge-${edge.id}`,
                         source: `node-${edge.dependant.id}`,
@@ -144,32 +152,26 @@ const Dashboard = React.memo( function Dashboard() {
                         label: edge.label,
                         width: edge.weight ? mapEdgeWeightToWidth(edge.weight) : 1,
                     }
-                });
+                }];
             }
 
-            // Handle HierarchyEdge (if applicable)
-            if ('children' in edge && edge.children && edge.children.length > 0) {
-                edge.children.forEach(child => {
-                    result.push({
-                        data: {
-                            id: `edge-${edge.id}-to-${child.id}`,
-                            source: `node-${edge.parent.id}`,
-                            target: `node-${child.id}`,
-                            label: edge.label,
-                            width: 1,
-                        }
-                    });
-                });
+            if ('children' in edge && edge.children && edge.children.length > 0 && nodeIds.has(edge.parent.id)) {
+                return edge.children.filter(child => nodeIds.has(child.id)).map(child => ({
+                    data: {
+                        id: `edge-${edge.id}-to-${child.id}`,
+                        source: `node-${edge.parent.id}`,
+                        target: `node-${child.id}`,
+                        label: edge.label,
+                        width: 1,
+                    }
+                }));
             }
 
-            return result;
+            return [];
         });
 
         return [...nodes, ...edges];
-    };
-
-
-    const elements = getElements(data);
+    }, [data, filter]);
 
     const cyStyles: Stylesheet[] = [
         {
@@ -177,7 +179,7 @@ const Dashboard = React.memo( function Dashboard() {
             style: {
                 'background-color': 'data(backgroundColor)',
                 'label': 'data(name)',
-                'color': '#ffffff', // White text for visibility
+                'color': '#ffffff',
                 'text-valign': 'center',
                 'text-halign': 'center',
                 'shape': 'data(shape)',
@@ -187,10 +189,10 @@ const Dashboard = React.memo( function Dashboard() {
             selector: 'edge',
             style: {
                 'width': 'data(width)',
-                'line-color': '#64e0ff', // White or light gray edges for visibility
+                'line-color': '#64e0ff',
                 'curve-style': 'bezier',
                 'target-arrow-shape': 'triangle',
-                'target-arrow-color': '#64e0ff', // Ensure the arrow is visible
+                'target-arrow-color': '#64e0ff',
             }
         },
 
@@ -199,6 +201,8 @@ const Dashboard = React.memo( function Dashboard() {
             style
         }))
     ] as Stylesheet[];
+
+    const layoutOptions = useMemo(() => getLayoutOptions(layout), [layout, elements, filter, data]);
 
 
     return (
@@ -223,10 +227,11 @@ const Dashboard = React.memo( function Dashboard() {
 
             {loading ? <p>Loading...</p> : error ? <p>Error loading data.</p> : (
                 <CytoscapeComponent
+                    key={refreshKey}
                     elements={elements}
                     stylesheet={cyStyles}
                     style={{ width: '100%', height: '100%', display: 'flex' }}
-                    layout={getLayoutOptions(layout)}
+                    layout={layoutOptions}
                 />
             )}
         </div>
@@ -240,18 +245,13 @@ const getLayoutOptions = (layoutName: string) => {
                 name: 'cose',
                 fit: true,
                 padding: 100,
-                // Increase node repulsion to spread nodes further apart
                 nodeRepulsion:  10000000,
-                // Adjust idealEdgeLength for better spacing
                 idealEdgeLength: 500,
-                // Ensure nodeOverlap is low to reduce overlap
                 nodeOverlap: 3,
-                animate: 'end',
-                animationDuration: 1500,
+                animate: true,
+                animationDuration: 500,
                 animationEasing: "ease-in-out",
-                // Adjust componentSpacing for better separation
                 componentSpacing: 500,
-                // EdgeElasticity can be adjusted if needed
                 edgeElasticity:  200,
                 randomize: false,
             };
@@ -260,13 +260,13 @@ const getLayoutOptions = (layoutName: string) => {
                 name: 'grid',
                 fit: true,
                 padding: 100,
-                avoidOverlap: true, // This should be enabled by default
-                avoidOverlapPadding: 500, // Increase padding to avoid overlap
-                // Increasing the row and column distance can also help
-                rowColDist: 100,
-                // Conditional logic to set distance between nodes if your data supports it
+                avoidOverlap: true,
+                avoidOverlapPadding: 500,
+                animate: true,
+                animationDuration: 1500,
+                edgeElasticity:  200,
+                animationEasing: "ease-in-out",
                 condDistance:  100,
-                position: (node:any) => ({ row: node.data('row'), col: node.data('col') }),
             };
         case 'circle':
             return {
@@ -280,7 +280,8 @@ const getLayoutOptions = (layoutName: string) => {
                 clockwise: true,
                 sort: undefined,
                 animate: true,
-                animationDuration: 3000,
+                animationDuration: 2000,
+                edgeElasticity:  200,
                 animationEasing: "ease-in-out"
             };
         case 'breadthfirst':
@@ -296,6 +297,7 @@ const getLayoutOptions = (layoutName: string) => {
                 nodeDimensionsIncludeLabels: true,
                 animate: true,
                 animationDuration: 1500,
+                edgeElasticity:  200,
                 maximal: true,
             };
 
