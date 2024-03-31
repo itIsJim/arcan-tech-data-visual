@@ -97,6 +97,18 @@ const nodeStyles = {
 
 const mapEdgeWeightToWidth = (weight: number) => Math.max(1, weight / 5);
 
+function getEdgeColor(edge:string) {
+    switch (edge) { // Assuming 'label' or another property defines the dependency type
+        case 'membership-edges':
+            return '#fff263';
+        case 'hierarchy-edge':
+            return '#f67fff';
+        default:
+            return '#64e0ff';
+    }
+}
+
+
 const Dashboard = React.memo( function Dashboard() {
     const { loading, error, data } = useQuery<QueryResponse>(GET_DEPENDENCY_GRAPH, {
         variables: { projectId: 287, versionId: '2e718ebd3f968a675dfbc36bb4a126e13186eddf' },
@@ -135,10 +147,15 @@ const Dashboard = React.memo( function Dashboard() {
                 return [{
                     data: {
                         id: `edge-${edge.id}`,
+                        name: 'membership-edges',
                         source: `node-${edge.member.id}`,
                         target: `node-${edge.parent.id}`,
                         label: edge.label,
                         width: 1,
+                    },
+                    style: {
+                        'line-color': getEdgeColor('membership-edges'),
+                        'target-arrow-color': getEdgeColor('membership-edges')
                     }
                 }];
             }
@@ -147,10 +164,15 @@ const Dashboard = React.memo( function Dashboard() {
                 return [{
                     data: {
                         id: `edge-${edge.id}`,
+                        name: 'dependency-edges',
                         source: `node-${edge.dependant.id}`,
                         target: `node-${edge.dependedUpon.id}`,
                         label: edge.label,
                         width: edge.weight ? mapEdgeWeightToWidth(edge.weight) : 1,
+                    },
+                    style: {
+                        'line-color': getEdgeColor('dependency-edges'),
+                        'target-arrow-color': getEdgeColor('dependency-edges')
                     }
                 }];
             }
@@ -159,10 +181,15 @@ const Dashboard = React.memo( function Dashboard() {
                 return edge.children.filter(child => nodeIds.has(child.id)).map(child => ({
                     data: {
                         id: `edge-${edge.id}-to-${child.id}`,
+                        name: 'hierarchy-edge',
                         source: `node-${edge.parent.id}`,
                         target: `node-${child.id}`,
                         label: edge.label,
                         width: 1,
+                    },
+                    style: {
+                        'line-color': getEdgeColor('hierarchy-edge'),
+                        'target-arrow-color': getEdgeColor('hierarchy-edge')
                     }
                 }));
             }
@@ -206,9 +233,9 @@ const Dashboard = React.memo( function Dashboard() {
 
 
     return (
-        <div style={{ width: '100vw', height: '100vh' }}>
-            <div style={{ padding: '10px', border:"2px solid #eb4897", margin: "10px"}}>
-                <label htmlFor="layout">Graph Layout: </label>
+        <div style={{ width: '100vw', height: '100vh', alignItems: 'center', justifyItems:"center" }}>
+            <div style={{ padding: '10px', border:"2px solid #eb4897", borderRadius:'20px', margin: "10px", display: 'flex', alignItems: 'center', justifyContent:"center"}}>
+                <label htmlFor="layout" style={{marginRight: '10px' }}>Graph Layout: </label>
                 <select id="layout" value={layout} onChange={(e) => setLayout(e.target.value)}>
                     <option value="cose">COSE</option>
                     <option value="grid">Grid</option>
@@ -216,12 +243,17 @@ const Dashboard = React.memo( function Dashboard() {
                     <option value="breadthfirst">Breadthfirst</option>
                 </select>
 
-                <label htmlFor="filter" style={{ marginLeft: '20px' }}>Filter: </label>
+                <label htmlFor="filter" style={{ marginLeft: '20px' ,marginRight: '10px' }}>Filter: </label>
                 <select id="filter" value={filter} onChange={(e) => setFilter(e.target.value)}>
                     <option value="all">All</option>
                     <option value="unit">Unit</option>
                     <option value="container">Container</option>
                 </select>
+                <div style={{display:"flex", marginLeft: "10px"}}>
+                    <div><span style={{color:'#64e0ff', marginLeft: "10px", fontSize:'20px'}}>•</span> dependency-edges </div>
+                    <div><span style={{color:'#f67fff', marginLeft: "10px", fontSize:'20px'}}>•</span> hierarchy-edges</div>
+                    <div><span style={{color:'#fff263', marginLeft: "10px", fontSize:'20px'}}>•</span> membership-edges</div>
+                </div>
             </div>
 
 
