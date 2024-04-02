@@ -98,7 +98,7 @@ const nodeStyles = {
 const mapEdgeWeightToWidth = (weight: number) => Math.max(1, weight / 5);
 
 function getEdgeColor(edge:string) {
-    switch (edge) { // Assuming 'label' or another property defines the dependency type
+    switch (edge) {
         case 'membership-edges':
             return '#fff263';
         case 'hierarchy-edge':
@@ -117,6 +117,8 @@ const Dashboard = React.memo( function Dashboard() {
     const [layout, setLayout] = useState<string>('cose');
     const [filter, setFilter] = useState<string>('all');
     const [refreshKey, setRefreshKey] = useState<number>(0);
+    const [selectedEdgeType, setSelectedEdgeType] = useState<string>('');
+
 
     const refreshLayout = useCallback(() => {
         setRefreshKey(oldKey => oldKey + 1);
@@ -130,17 +132,36 @@ const Dashboard = React.memo( function Dashboard() {
 
         const { allUnits, allContainers, membershipEdges, dependencyEdges, hierarchyEdges } = data.projectById.dependencyGraph;
 
+        let totalIncomingWeights: Record<string, number> = {};
+        dependencyEdges.forEach(edge => {
+            const targetId = `node-${edge.dependedUpon.id}`;
+            if (!totalIncomingWeights[targetId]) {
+                totalIncomingWeights[targetId] = 0;
+            }
+            totalIncomingWeights[targetId] += edge.weight;
+        });
+
         const filteredNodes = [...allUnits, ...allContainers].filter((node) => filter === 'all' || node.label === filter);
         const nodeIds = new Set(filteredNodes.map(node => node.id));
 
-        const nodes = filteredNodes.map((node) => ({
-            data: {
-                id: `node-${node.id}`,
-                label: node.label,
-                name: node.simpleName,
-            },
-            classes: node.label
-        }));
+        const nodes = filteredNodes.map((node) => {
+            const nodeId = `node-${node.id}`;
+            const totalWeight = totalIncomingWeights[nodeId] || 0;
+
+            const size = totalWeight * 0.05;
+            return {
+                data: {
+                    id: nodeId,
+                    label: node.label,
+                    name: node.simpleName,
+                    weight: totalWeight,
+                },
+                classes: node.label,
+                style: {
+                   padding: size,
+                },
+            };
+        });
 
         const edges = [...membershipEdges, ...dependencyEdges, ...hierarchyEdges].flatMap((edge) => {
             if ('member' in edge && nodeIds.has(edge.member.id) && nodeIds.has(edge.parent.id)) {
@@ -200,7 +221,7 @@ const Dashboard = React.memo( function Dashboard() {
         return [...nodes, ...edges];
     }, [data, filter]);
 
-    const cyStyles: Stylesheet[] = [
+    const cyStyles: Stylesheet[] = useMemo(() => [
         {
             selector: 'node',
             style: {
@@ -212,24 +233,31 @@ const Dashboard = React.memo( function Dashboard() {
                 'shape': 'data(shape)',
             }
         },
+
         {
             selector: 'edge',
             style: {
                 'width': 'data(width)',
-                'line-color': '#64e0ff',
                 'curve-style': 'bezier',
                 'target-arrow-shape': 'triangle',
-                'target-arrow-color': '#64e0ff',
             }
         },
 
+        {
+            selector: `edge[name="${selectedEdgeType}"]`,
+            style: {
+                'width': 5,
+            }
+        },
         ...Object.entries(nodeStyles).map(([label, style]) => ({
             selector: `.${label}`,
             style
         }))
-    ] as Stylesheet[];
+    ], [selectedEdgeType]) as Stylesheet[];
 
-    const layoutOptions = useMemo(() => getLayoutOptions(layout), [layout, elements, filter, data]);
+    const layoutOptions = useMemo(() =>{
+        getLayoutOptions(layout)
+    }, [layout, elements, filter, data]);
 
 
     return (
@@ -250,9 +278,14 @@ const Dashboard = React.memo( function Dashboard() {
                     <option value="container">Container</option>
                 </select>
                 <div style={{display:"flex", marginLeft: "10px"}}>
-                    <div><span style={{color:'#64e0ff', marginLeft: "10px", fontSize:'20px'}}>•</span> dependency-edges </div>
-                    <div><span style={{color:'#f67fff', marginLeft: "10px", fontSize:'20px'}}>•</span> hierarchy-edges</div>
-                    <div><span style={{color:'#fff263', marginLeft: "10px", fontSize:'20px'}}>•</span> membership-edges</div>
+                    <label htmlFor="layout" style={{marginRight: '10px',marginLeft: '20px', alignSelf:"center" }}><span>Select edges: </span></label>
+                    <div style={{ cursor:'pointer'}} onClick={() => setSelectedEdgeType('dependency-edges')}><span style={{color:'#64e0ff', marginLeft: "10px", fontSize:'20px'}}>•</span> dependency-edges </div>
+                    <div style={{cursor:'pointer'}} onClick={() => setSelectedEdgeType('hierarchy-edge')}><span style={{color:'#f67fff', marginLeft: "10px", fontSize:'20px'}}>•</span> hierarchy-edges</div>
+                    <div style={{cursor:'pointer'}} onClick={() => setSelectedEdgeType('membership-edges')}><span style={{color:'#fff263', marginLeft: "10px", fontSize:'20px'}}>•</span> membership-edges</div>
+                    {
+                        selectedEdgeType !== '' &&  <div style={{cursor:'pointer',marginLeft: '20px', alignSelf:"center"}} onClick={() => setSelectedEdgeType('')}><span>Reload edges </span></div>
+
+                    }
                 </div>
             </div>
 
@@ -276,22 +309,22 @@ const getLayoutOptions = (layoutName: string) => {
             return {
                 name: 'cose',
                 fit: true,
-                padding: 100,
-                nodeRepulsion:  10000000,
+                padding: 50,
+                nodeRepulsion:  20000000,
                 idealEdgeLength: 500,
-                nodeOverlap: 3,
+                nodeOverlap: 100,
                 animate: true,
                 animationDuration: 500,
                 animationEasing: "ease-in-out",
                 componentSpacing: 500,
                 edgeElasticity:  200,
-                randomize: false,
+                randomize: true,
             };
         case 'grid':
             return {
                 name: 'grid',
                 fit: true,
-                padding: 100,
+                padding: 300,
                 avoidOverlap: true,
                 avoidOverlapPadding: 500,
                 animate: true,
@@ -304,7 +337,7 @@ const getLayoutOptions = (layoutName: string) => {
             return {
                 name: 'circle',
                 fit: true,
-                padding: 10,
+                padding: 20,
                 avoidOverlap: true,
                 radius: undefined,
                 startAngle: 3 / 2 * Math.PI,
