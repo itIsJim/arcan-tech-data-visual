@@ -132,6 +132,7 @@ const Dashboard = React.memo( function Dashboard() {
 
         const { allUnits, allContainers, membershipEdges, dependencyEdges, hierarchyEdges } = data.projectById.dependencyGraph;
 
+        // Compute total incoming weight for each node
         let totalIncomingWeights: Record<string, number> = {};
         dependencyEdges.forEach(edge => {
             const targetId = `node-${edge.dependedUpon.id}`;
@@ -254,10 +255,7 @@ const Dashboard = React.memo( function Dashboard() {
             style
         }))
     ], [selectedEdgeType]) as Stylesheet[];
-
-    const layoutOptions = useMemo(() =>{
-        getLayoutOptions(layout)
-    }, [layout, elements, filter, data]);
+    const layoutOptions = useMemo(() => getLayoutOptions(layout), [layout, elements, filter, data]);
 
 
     return (
