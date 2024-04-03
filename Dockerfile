@@ -7,11 +7,19 @@ WORKDIR /app
 # Copy package.json and package-lock.json (or yarn.lock) files
 COPY package*.json ./
 
+# Adjust permissions to avoid any npm install permission issues
+RUN npm config set unsafe-perm true
+
 # Install dependencies
 RUN npm install
 
 # Copy the rest of your app's source code
 COPY . .
+
+# Use a non-root user
+RUN adduser --disabled-password --gecos '' appuser
+RUN chown -R appuser:appuser /app
+USER appuser
 
 # Build your app
 RUN npm run build
