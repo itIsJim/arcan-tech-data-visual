@@ -34,6 +34,17 @@ cd <repository-directory>
 
 Replace `<repository-url>` with the actual URL of your Git repository and `<repository-directory>` with the name of the directory into which the repository is cloned.
 
+### Configure Environment Variables
+
+
+
+```shell
+#!/bin/bash
+IMAGE=node:16
+exec docker run --add-host host.docker.internal:host-gateway --rm -it -p 5173:5173 \
+--user="$(id -u):$(id -g)" -v "$PWD":/app "$IMAGE" npm --prefix /app "$@"
+```
+
 ### Build and Run the Application
 
 The application can be easily built and started using Docker Compose. The provided `docker-compose.yml` file describes the services that make your application run, including the application environment and port mappings.
