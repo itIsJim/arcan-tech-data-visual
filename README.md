@@ -36,8 +36,6 @@ Replace `<repository-url>` with the actual URL of your Git repository and `<repo
 
 ### Configure Environment Variables
 
-
-
 ```shell
 #!/bin/bash
 IMAGE=node:16
